@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_18_202634) do
+ActiveRecord::Schema[8.1].define(version: 2022_12_18_202634) do
   create_table "authors", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
     t.boolean "active"
     t.datetime "created_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.datetime "updated_at", null: false
   end
 
   create_table "book_authors", force: :cascade do |t|
-    t.integer "book_id", null: false
     t.integer "author_id", null: false
+    t.integer "book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_book_authors_on_author_id"
@@ -29,33 +29,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_202634) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.integer "category_id", null: false
-    t.date "proposal_date"
-    t.date "contract_date"
-    t.date "published_date"
-    t.integer "units_sold"
-    t.text "notes"
     t.boolean "active"
+    t.integer "category_id", null: false
+    t.date "contract_date"
     t.datetime "created_at", null: false
+    t.text "notes"
+    t.date "proposal_date"
+    t.date "published_date"
+    t.string "title"
+    t.integer "units_sold"
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_books_on_category_id"
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
     t.boolean "active"
     t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
+    t.datetime "created_at", precision: nil, null: false
     t.string "email"
     t.string "password_hash"
     t.string "password_salt"
-    t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.string "username"
   end
 
   add_foreign_key "book_authors", "authors"
